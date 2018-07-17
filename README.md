@@ -35,9 +35,9 @@ Options:
 
 # Warning
 
-this tool retrieves file as binary, so UTF-16 encoded file cannot be converted properly.
+this tool retrieves data as binary, so UTF-16 encoded file cannot be converted properly.
 [recode_rs](https://github.com/hsivonen/recode_rs) is recommended for encoding converter.
 
 ```
-recode_rs -i u16_encoded.txt -f UTF-16 -t UTF-8 | crlfconv -f crlf -t lf
+recode_rs -i u16_encoded.txt -f UTF-16 -t UTF-8 | crlfconv -f crlf -t lf | recode_rs -f UTF-8 -t UTF-16 -o u16_encoded_lf.txt
 ```
