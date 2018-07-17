@@ -1,0 +1,6 @@
+[package]
+name = "crlfconv-rs"
+version = "0.1.0"
+authors = ["ito <ito@intercom.co.jp>"]
+
+[dependencies]
