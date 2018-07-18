@@ -19,9 +19,7 @@ install:
 
     $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
 
-    Get-ChildItem -r $(Join-Path $env:USERPROFILE .cargo/bin)
-
-    rust -vV
+    rustc -vV
 
     cargo -V
 build: false
