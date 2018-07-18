@@ -3,17 +3,18 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       CHANNEL: stable
-      TARGET: i686-unknown-linux-gnu
+      TARGET: i686-unknown-linux-musl
+      RUST_HOST: i686-unknown-linux-gnu
 
 install:
 - pwsh: >-
       curl -sSf https://sh.rustup.rs -o rustup-init.sh
 
-      sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+      sh rustup-init.sh --default-host $env:RUST_HOST --default-toolchain $env:CHANNEL -y
 
       $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
 
-      rustup target add i686-unknown-linux-musl
+      rustup target add $env:TARGET
 
       sudo apt-get update
 
@@ -23,7 +24,7 @@ install:
 build: false
 test_script:
   - export PATH=$PATH:$HOME/.cargo/bin
-  - cargo build --verbose --release --target i686-unknown-linux-musl
+  - cargo build --verbose --release --target $TARGET
 artifacts:
-  - path: target/release/crlfconv*
+  - path: target/$TARGET/release/crlfconv*
     name: crlfconv-binary
