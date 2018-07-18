@@ -1,0 +1,24 @@
+version: 1.0.{build}
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      CHANNEL: stable
+      TARGET: x86_64-pc-windows-gnu
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      CHANNEL: stable
+      TARGET: i686-pc-windows-gnu
+
+install:
+- pwsh: >-
+    curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
+    & $(Join-Path $(Get-Location) rustup-init.exe) --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+    $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
+    rustc -vV
+    cargo -V
+build: false
+test_script:
+  - set PATH=%PATH%;%USERPROFILE%/.cargo/bin
+  - cargo build --verbose --release
+artifacts:
+  - path: target/release/crlfconv*
+    name: crlfconv-binary
