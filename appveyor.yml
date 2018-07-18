@@ -1,12 +1,12 @@
 version: 1.0.{build}
 environment:
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      CHANNEL: stable
-      TARGET: x86_64-pc-windows-gnu
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      CHANNEL: stable
-      TARGET: i686-pc-windows-gnu
+    # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    #   CHANNEL: stable
+    #   TARGET: x86_64-pc-windows-gnu
+    # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    #   CHANNEL: stable
+    #   TARGET: i686-pc-windows-gnu
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       CHANNEL: stable
       TARGET: i686-unknown-linux-musl
@@ -25,7 +25,7 @@ install:
     {
       curl -sSf https://sh.rustup.rs -o rustup-init.sh
       sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
-      $env:PATH = "$($env:PATH):$(Join-Path) $env:HOME .cargo/bin)"
+      $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
     }
 build: false
 test_script:
