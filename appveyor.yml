@@ -7,7 +7,7 @@ environment:
     - channel: stable
       target: i686-pc-windows-gnu
     - channel: stable
-      target: i686-unknown-linux-musl
+      target: i686-unknown-linux-gnu
     - channel: stable
       target: x86_64-apple-darwin
 
@@ -17,7 +17,9 @@ install:
 
     .\rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
 
-    $env:PATH = "$($env:PATH);c:/Users/appveyor/.cargo/bin"
+    $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
+
+    Get-ChildItem -r $(Join-Path $env:USERPROFILE .cargo/bin)
 
     rust -vV
 
