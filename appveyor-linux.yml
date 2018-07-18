@@ -11,9 +11,12 @@ install:
 
       sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
 
+      $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
+
       rustup target add i686-unknown-linux-musl
 
-      $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
+      apt-get install gcc-multilib -y
+
       
 build: false
 test_script:
