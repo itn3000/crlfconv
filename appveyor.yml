@@ -1,27 +1,32 @@
 version: 1.0.{build}
-image: Visual Studio 2017
 environment:
   matrix:
-    - channel: stable
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      channel: stable
       target: x86_64-pc-windows-gnu
-    - channel: stable
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      channel: stable
       target: i686-pc-windows-gnu
-    - channel: stable
-      target: i686-unknown-linux-gnu
-    - channel: stable
-      target: x86_64-apple-darwin
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      channel: stable
+      target: i686-unknown-linux-musl
 
 install:
 - pwsh: >-
-    curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
-
-    .\rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
-
-    $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
-
-    rustc -vV
-
-    cargo -V
+    if($env:APPVEYOR_BUILD_WORKER_IMAGE -ne "Ubuntu")
+    {
+      curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
+      & $(Join-Path $(Get-Location) rustup-init.exe) --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+      $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
+      rustc -vV
+      cargo -V
+    }
+    else
+    {
+      curl -sSf https://sh.rustup.rs -o rustup-init.sh
+      sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+      $env:PATH = "$($env:PATH):$(Join-Path) $env:HOME .cargo/bin)"
+    }
 build: false
 test_script:
   - set PATH=%PATH%;%USERPROFILE%/.cargo/bin
