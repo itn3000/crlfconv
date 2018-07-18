@@ -23,7 +23,7 @@ install:
 build: false
 test_script:
   - export PATH=$PATH:$HOME/.cargo/bin
-  - cargo build --verbose --release
+  - cargo build --verbose --release --target i686-unknown-linux-musl
 artifacts:
   - path: target/release/crlfconv*
     name: crlfconv-binary
