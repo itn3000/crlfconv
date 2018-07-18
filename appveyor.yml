@@ -2,14 +2,14 @@ version: 1.0.{build}
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      channel: stable
-      target: x86_64-pc-windows-gnu
+      CHANNEL: stable
+      TARGET: x86_64-pc-windows-gnu
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      channel: stable
-      target: i686-pc-windows-gnu
+      CHANNEL: stable
+      TARGET: i686-pc-windows-gnu
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-      channel: stable
-      target: i686-unknown-linux-musl
+      CHANNEL: stable
+      TARGET: i686-unknown-linux-musl
 
 install:
 - pwsh: >-
