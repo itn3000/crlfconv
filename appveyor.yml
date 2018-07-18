@@ -24,4 +24,7 @@ install:
     cargo -V
 build: false
 test_script:
-  - cargo build --verbose
+  - cargo build --verbose --release
+artifacts:
+  - path: target/release/crlfconv*
+    name: crlfconv-binary
