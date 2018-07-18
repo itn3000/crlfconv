@@ -15,7 +15,9 @@ install:
 
       rustup target add i686-unknown-linux-musl
 
-      apt-get install gcc-multilib -y
+      sudo apt-get update
+
+      sudo apt-get install gcc-multilib -y
 
       
 build: false
