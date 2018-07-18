@@ -10,11 +10,15 @@ environment:
 
 install:
 - pwsh: >-
-    curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
-    & $(Join-Path $(Get-Location) rustup-init.exe) --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
-    $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
-    rustc -vV
-    cargo -V
+      curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
+
+      .\rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+
+      $env:PATH = "$($env:PATH);$(Join-Path $env:USERPROFILE .cargo/bin)"
+
+      rustc -vV
+      
+      cargo -V
 build: false
 test_script:
   - set PATH=%PATH%;%USERPROFILE%/.cargo/bin

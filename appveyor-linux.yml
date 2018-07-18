@@ -7,10 +7,14 @@ environment:
 
 install:
 - pwsh: >-
-    curl -sSf https://sh.rustup.rs -o rustup-init.sh
-    sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
-    rustup target add i686-unknown-linux-musl
-    $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
+      curl -sSf https://sh.rustup.rs -o rustup-init.sh
+
+      sh rustup-init.sh --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+
+      rustup target add i686-unknown-linux-musl
+
+      $env:PATH = "$($env:PATH):$(Join-Path $env:HOME .cargo/bin)"
+      
 build: false
 test_script:
   - export PATH=$PATH:$HOME/.cargo/bin
