@@ -24,7 +24,7 @@ install:
     cargo -V
 build: false
 test_script:
-  - set PATH=%PATH;%USERPROFILE%/.cargo/bin
+  - set PATH=%PATH%;%USERPROFILE%/.cargo/bin
   - cargo build --verbose --release
 artifacts:
   - path: target/release/crlfconv*
