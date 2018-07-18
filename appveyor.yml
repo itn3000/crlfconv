@@ -1,0 +1,27 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+environment:
+  matrix:
+    - channel: stable
+      target: x86_64-pc-windows-gnu
+    - channel: stable
+      target: i686-pc-windows-gnu
+    - channel: stable
+      target: i686-unknown-linux-musl
+    - channel: stable
+      target: x86_64-apple-darwin
+
+install:
+- pwsh: >-
+    curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
+
+    rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+
+    $env:PATH = "$($env:PATH);c:/Users/appveyor/.cargo/bin"
+
+    rust -vV
+
+    cargo -V
+build: false
+test_script:
+  - cargo build --verbose

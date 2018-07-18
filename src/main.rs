@@ -113,8 +113,13 @@ fn do_main(args: Args) -> std::io::Result<()> {
     loop {
         let bytesread = input.read(&mut buf[offset..])?;
         if bytesread == 0 {
+            if offset > 0 {
+                // output remaining cr value
+                output.write(&[CR_VALUE])?;
+            }
             break;
         }
+        offset = 0;
         let mut shouldskip = false;
         for i in 0usize..bytesread {
             if shouldskip {
