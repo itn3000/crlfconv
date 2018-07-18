@@ -15,7 +15,7 @@ install:
 - pwsh: >-
     curl -sSf https://win.rustup.rs/x86_64 -o rustup-init.exe
 
-    rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
+    .\rustup-init.exe --default-host $env:TARGET --default-toolchain $env:CHANNEL -y
 
     $env:PATH = "$($env:PATH);c:/Users/appveyor/.cargo/bin"
 
