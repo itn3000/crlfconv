@@ -4,3 +4,12 @@ rust:
   - stable
 script:
   - cargo build --verbose --release
+  - mv target/release/crlfconv target/release/crlfconv-osx
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file: "target/release/crlfconv"
+  api_key:
+    secure: "ttyHwOJtikDlJvWnuVPJTG4nqJBrZ8dfGEMlmyE8S5+F7nkkWgVH9mKJ6jjvVldehv1G4Vzm9oBPMCh9ZqCqCztG2gBqLApwNstJs3liIfCnpLfvpyl0SrT4WA4xzGX2zYK1X8MKJ9VN9tszsXYAMhk8NLTs7lKKMKA2IdtHHCrJisYdf+7NCmLaviF1fRuM2NmiQCUwQ2u4PJH3AciWLh5A8qtt9KQfCk5BgDwL6bcPNnMlkjScxPEJuxoAsRGrpj1lOfVP3ngvplH1oxCDV3/mS4zN6BxZShRmhRGDLDFkvfQamHZQYAoz5MbcsRqKR2anWfu+XGjVYo7mjFSXtz6+dCEtLhLU4twQIqWO9aDk9hoibhfCQ0k5IGV96JCvyUf++wcUrfhwMXE4t9UaatJz4p+bdG6LrNvxp3v8dkYXNKKoCsgKeq10I1Psexmt854zdYFWydL2IdzqkIlkYugFxd1OiEDyJ4A/C6mOSmIMxJU48UAdiTG0/wR2RL7SingGCwlGn7gA/AL5kCYJAWdz+DnFv5EiK8mn+J+Dv8it503/J101ZfxheOnw1KsjtL5/+AjhfguapoHKgXNo1jX3ATALv7sQEMjcPgqfC+m5cCKWqWUvmYziVwL37V5S+pt058NyqLiZ4fenStsiy1kgZGWv/F3N8h8pQAPOmHY="
+  on:
+    tags: true

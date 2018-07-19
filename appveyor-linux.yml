@@ -26,6 +26,14 @@ build: false
 test_script:
   - export PATH=$PATH:$HOME/.cargo/bin
   - cargo build --verbose --release --target $TARGET
+  - mv target/$TARGET/release/crlfconv target/$TARGET/release/crlfconv-$TARGET
 artifacts:
-  - path: target/$TARGET/release/crlfconv*
+  - path: target/$TARGET/release/crlfconv-x86-$TARGET
     name: crlfconv-binary
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: "shj27QumlQzHI4tJDnaC+RWZ0Wn6Ovqa5fSjRCczbsAoXOmYVlJJbymhaFt+Ruav"
+    artifact: crlfconv-binary
+    on:
+      APPVEYOR_REPO_TAG: true

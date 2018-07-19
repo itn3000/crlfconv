@@ -24,6 +24,14 @@ build: false
 test_script:
   - set PATH=%PATH%;%USERPROFILE%/.cargo/bin
   - cargo build --verbose --release
+  - ren target/release/crlfconv.exe crlfconv-%TARGET%.exe
 artifacts:
-  - path: target/release/crlfconv*
+  - path: target/release/crlfconv-%TARGET%.exe
     name: crlfconv-binary
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: "shj27QumlQzHI4tJDnaC+RWZ0Wn6Ovqa5fSjRCczbsAoXOmYVlJJbymhaFt+Ruav"
+    artifact: crlfconv-binary
+    on:
+      APPVEYOR_REPO_TAG: true
