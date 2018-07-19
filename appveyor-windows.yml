@@ -26,7 +26,7 @@ test_script:
   - cargo build --verbose --release
   - ren target\release\crlfconv.exe crlfconv-%TARGET%.exe
 artifacts:
-  - path: target/release/crlfconv-%TARGET%.exe
+  - path: target/release/crlfconv-*
     name: crlfconv-binary
 deploy:
   - provider: GitHub

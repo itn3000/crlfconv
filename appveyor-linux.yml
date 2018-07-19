@@ -28,7 +28,7 @@ test_script:
   - cargo build --verbose --release --target $TARGET
   - mv target/$TARGET/release/crlfconv target/$TARGET/release/crlfconv-$TARGET
 artifacts:
-  - path: target/$TARGET/release/crlfconv-x86-$TARGET
+  - path: target/$TARGET/release/crlfconv-*
     name: crlfconv-binary
 deploy:
   - provider: GitHub
