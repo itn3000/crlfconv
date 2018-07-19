@@ -1,0 +1,6 @@
+language: rust
+os: osx
+rust:
+  - stable
+script:
+  - cargo build --verbose --release
