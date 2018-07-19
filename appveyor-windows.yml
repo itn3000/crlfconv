@@ -1,5 +1,5 @@
 version: 1.0.{build}
-skip_tags: true
+skip_tags: false
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -24,7 +24,7 @@ build: false
 test_script:
   - set PATH=%PATH%;%USERPROFILE%/.cargo/bin
   - cargo build --verbose --release
-  - ren target/release/crlfconv.exe crlfconv-%TARGET%.exe
+  - ren target\release\crlfconv.exe crlfconv-%TARGET%.exe
 artifacts:
   - path: target/release/crlfconv-%TARGET%.exe
     name: crlfconv-binary
